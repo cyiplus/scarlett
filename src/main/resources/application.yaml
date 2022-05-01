@@ -1,0 +1,46 @@
+server:
+    port: 9000
+
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/scarlett?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
+        username: root
+        password: Qq9637258@
+    # security:
+    #     user:
+    #         name: user
+    #         password: 123456
+
+    redis:
+        host: 127.0.0.1
+        port: 6379
+        password: 
+        
+mybatis-plus:
+    global-config:
+        db-config:
+            id-type: auto
+            logic-delete-field: flag  # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+            logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+            logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+    mapper-locations:
+    - classpath*:/mapper/**Mapper.xml
+    type-aliases-package: com.cyiplus.scarlett.entity
+
+logging:
+    # file:
+        # path: ../var/log
+    level:
+        # root: ERROR
+        # "[org.springframework]": ERROR
+        # "[com.cyiplus.einfach]": INFO
+        "[com.cyiplus]": DEBUG
+        "[mybatis]": DEBUG
+
+config:
+    jwt:
+        header: Authorization
+        expire: 604800 #7天，秒单位
+        secret: ji8n3439n439n43ld9ne9343fdfer49h
+
