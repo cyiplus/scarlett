@@ -1,0 +1,257 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : MYSQL
+ Source Server Type    : MySQL
+ Source Server Version : 80025
+ Source Host           : localhost:3306
+ Source Schema         : scarlett
+
+ Target Server Type    : MySQL
+ Target Server Version : 80025
+ File Encoding         : 65001
+
+ Date: 01/05/2022 11:22:07
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for i_article
+-- ----------------------------
+DROP TABLE IF EXISTS `i_article`;
+CREATE TABLE `i_article` (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '编码',
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户编码',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主题',
+  `subtitle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '副标题',
+  `keyword` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '关键字',
+  `title_images` int NOT NULL DEFAULT '0' COMMENT '副标题是否带图片 0 没有， 1张图片，3张图片',
+  `title_images_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '副标题图片链接',
+  `level` int DEFAULT '1' COMMENT '等级',
+  `category` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '类型',
+  `publish` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 未发布， 1 已经发布',
+  `publish_time` datetime DEFAULT NULL COMMENT '发布时间',
+  `views` int DEFAULT '0' COMMENT '查看人数',
+  `likes` int DEFAULT '0' COMMENT '点赞人数',
+  `comments` int DEFAULT '0' COMMENT '评论次数',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `change_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `version` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '锁',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of i_article
+-- ----------------------------
+BEGIN;
+INSERT INTO `i_article` VALUES ('d4007ece5d7202f521443443a8a635a1', '0cc2bd7f08ce2187b26c14fbb9c5b732', 'Women in Artificial Intelligence at SAP: Get to Know Jana Wuerth', 'As you may already know, SAP Women In Tech is a cross-board initiative that aims to inspire and enlighten all women at SAP to become more visible by providing a network, support, and a platform to demonstrate their business expertise to a broad audience. ', 'SAP', 0, NULL, 5, 'SAP', 1, '2022-04-29 12:52:00', 46, 0, 0, '2022-04-28 08:10:39', '2022-04-30 20:25:59', '2022-04-30 20:25:59');
+INSERT INTO `i_article` VALUES ('e475c67bb7f6d90c11235fc63f4e1df1', '0cc2bd7f08ce2187b26c14fbb9c5b732', 'New Learning Tutorial on SAP Process Automation', 'SAP Process Automation is a newly introduced service in SAP Business Technology Platform that combines the capabilities of workflow management and robotic process automation, with intuitive citizen developer experience.', 'SAP', 0, NULL, 5, 'SAP', 1, '2022-04-29 12:52:01', 23, 0, 0, '2022-04-28 02:39:12', '2022-04-30 20:26:02', '2022-04-30 20:26:02');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for i_article_body
+-- ----------------------------
+DROP TABLE IF EXISTS `i_article_body`;
+CREATE TABLE `i_article_body` (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '编码',
+  `article_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文章编码',
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of i_article_body
+-- ----------------------------
+BEGIN;
+INSERT INTO `i_article_body` VALUES ('179a48c6063aa9613d589e0595a161fd', 'e475c67bb7f6d90c11235fc63f4e1df1', '<p><strong>SAP Process Automation</strong>&nbsp;is a newly introduced service in SAP Business Technology Platform that combines the capabilities of workflow management and robotic&nbsp;process automation, with intuitive citizen developer experience.</p><p><a href=\"https://blogs.sap.com/2022/02/14/accelerate-automation-with-a-new-no-code-experience-with-sap-process-automation-now-generally-available\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 125, 184);\">Read the blog</a>&nbsp;from Bhagat Nainani to understand how SAP Process Automation can enable organisations to manage their business processes with no-code experience.</p><p>If you haven’t tried out the service yet,&nbsp;<a href=\"https://blogs.sap.com/2022/03/30/sap-process-automation-free-tier-is-out-create-your-own-automations/\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 125, 184);\">follow the blog</a>&nbsp;from Sebastian Schroetel to access the Free Tier account and get started with the building your first process in new enhanced design studio.</p><p>If you are wondering where to start from, then we have couple of options for you:</p><ol><li>Learning Journey (<a href=\"https://learning.sap.com/learning-journey/low-code-no-code-applications-and-automations-for-citizen-developers\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 125, 184);\">https://learning.sap.com/learning-journey/low-code-no-code-applications-and-automations-for-citizen-developers</a>) where we will soon have a chapter on building your processes using SAP Process Automation.</li><li>Murali Shanmugham wrote a series of blogs to&nbsp;<a href=\"https://blogs.sap.com/tag/GetStartedWithSPA/\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 125, 184);\">Get Started With SAP Process Automation Series&nbsp;</a>which beautifully covers different capabilities of SAP Process Automation.</li></ol><p>&nbsp;</p><p>… and the latest edition to the learning library is&nbsp;<strong>SAP Developer Tutorial Mission for the Beginners:</strong>&nbsp;<a href=\"https://developers.sap.com/mission.sap-process-automation.html\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 125, 184);\">Build your first business process with SAP Process Automation</a></p><p>The use case for the tutorial is on&nbsp;<em>Sales Order Approval Process</em>&nbsp;where the sales orders are received manually via different sources like email, paper-based etc. A person then enters the details of the sales order via an online form and submits it for approval from respective department by the designated business users. Approver has to ensure that the sales order requirement can be met and delivered on time to the requestor. Once approved the requestor is notified and the sales order is created in the backend S/4HANA system.</p><p><img src=\"https://blogs.sap.com/wp-content/uploads/2022/04/Picture-1-3.png\"></p><p>&nbsp;</p><p>It is a 1 hour 15 minutes mission which helps you to try-out different capabilities of SAP Process Automation. This mission is a series of tutorials, where the first part contains 5 tutorials where you will learn how SAP Process Automation allows you to build an automated process using no-code application designer through the combination of process, forms, and conditional logics. Automated tasks in MyInbox and notifications ensures that the approvers are informed appropriately, and they can access their inboxes on-the-go to take decisions.</p><ol><li><a href=\"https://developers.sap.com/tutorials/spa-subscribe-booster.html\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 125, 184);\">Setup your account in SAP Business Technology Platform</a></li><li><a href=\"https://developers.sap.com/tutorials/spa-create-process.html\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 125, 184);\">Create a business project and a process</a></li><li>Create forms to: (<a href=\"https://developers.sap.com/tutorials/spa-create-forms.html\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 125, 184);\">tutorial link</a>)</li><li class=\"ql-indent-1\">start the process</li><li class=\"ql-indent-1\">get approval from the manager</li><li><a href=\"https://developers.sap.com/tutorials/spa-create-process-condition.html\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 125, 184);\">Add conditional flow to the process</a></li><li>Finally run the process: (<a href=\"https://developers.sap.com/tutorials/spa-run-process.html\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 125, 184);\">tutorial link</a>)</li><li class=\"ql-indent-1\">by releasing and deploying the process.</li><li class=\"ql-indent-1\">starting the workflow from the start form</li><li class=\"ql-indent-1\">accessing monitoring application to track the progress of the workflow</li><li class=\"ql-indent-1\">managing tasks from MyInbox application</li></ol><p>The mission would not have been possible without you&nbsp;<a href=\"https://people.sap.com/chaitanyapriya.puvvada\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 125, 184);\">Chaitanya Priya Puvvada</a>&nbsp;,&nbsp;<a href=\"https://people.sap.com/shamichi\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 125, 184);\">Samir HAMICHI</a>&nbsp;and&nbsp;<a href=\"https://people.sap.com/stephan.schluchter\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 125, 184);\">Stephan Schluchter</a>. Thank you for all your valuable contributions.</p><p><img src=\"https://blogs.sap.com/wp-content/uploads/2022/04/Picture-2-2.png\"></p><p>What are you waiting for? start learning SAP Process Automation and explore its various capabilities in a new no-code tool experience.</p><p>Keep a watch on this blog as it will be updated soon with next series of the tutorials, where you will learn how to create and add automations, decision and visibility scenarios in your business process. Until then keep learning more about SAP Process Automation service and consume them in your use cases. If you have any questions, do write to us.</p><p><br></p>');
+INSERT INTO `i_article_body` VALUES ('43655eeeaaa6a81c0421503a1685129b', '7f69b066854700cef304b275fd22c69b', '<p>The following sections describe the architecture of an SAP system and which aspects are relevant for you as an ABAP developer with regard to performance. Let\'s first discuss the different layers of an SAP system and their tasks.</p><p><br></p><p><strong>SAP System Architecture</strong></p><p><br></p><p>An SAP system extends over multiple logical layers. From</p>');
+INSERT INTO `i_article_body` VALUES ('648ba00adcc427b132e5df541df8eb2a', '33c04430e0c7bcecee6efc568087d448', '<p>TESTST</p>');
+INSERT INTO `i_article_body` VALUES ('7666c63d23ee6edb88d87856d835561c', 'd4007ece5d7202f521443443a8a635a1', '<h4>Dear SAP Community,&nbsp;&nbsp;</h4><p>&nbsp;</p><p>As you may already know,&nbsp;<a href=\"https://events.sap.com/women-in-tech/en/home\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 125, 184);\">SAP Women In&nbsp;Tech</a>&nbsp;is a cross-board initiative that aims to inspire and enlighten all women at SAP to become more visible by providing a network, support, and a platform to demonstrate their business expertise to a broad audience.&nbsp;&nbsp;&nbsp;</p><p>At SAP, we genuinely believe in an incredible pool of talented women working in the tech world, capable of driving innovation, employee satisfaction, and customer success.&nbsp;&nbsp;</p><p>With this new format, encouraged by SAP Women in Tech, we want to highlight the great work of our female colleagues in the&nbsp;AI&nbsp;at SAP space and directly learn from them all around their motivations, inspirations, and individual experiences.&nbsp;&nbsp;&nbsp;</p><p><img src=\"https://blogs.sap.com/wp-content/uploads/2022/03/blog-este.png\">&nbsp;</p><p>&nbsp;Let us kick off with Jana Wuerth, Product Management Expert at SAP’s AI Product Success Team!&nbsp;&nbsp;&nbsp;</p><p><img src=\"https://blogs.sap.com/wp-content/uploads/2022/03/jana-wu%CC%88rth.1024x1024.jpg\" height=\"297\" width=\"297\">&nbsp;</p><h3><strong>Could you please describe your role at SAP?</strong>&nbsp;</h3><p>I am a product management expert within our Artificial Intelligence Unit at SAP, focusing on go-to-market strategy and commercialization.</p><p>Generally, product managers are responsible for the product they are working on, which includes knowing customer and market requirements, delivering products to the market, retiring them if necessary, and creating product assets. This variety is the aspect of my job as a product manager which I enjoy the most.&nbsp;&nbsp;</p><p>Working on my core areas, GTM strategy, and commercialization is also super exciting and allows me to define specific activities that need to be carried out to promote the products to our field colleagues, partners, and customers. The commercialization part is my favorite, as it is a complex process involving many dependencies, requiring experience and detailed knowledge, as well as attention to detail. However, the best part about it is the high level of interaction with many different people inside and outside of SAP.&nbsp;</p><h3><strong>Where did you see yourself 10 years ago?&nbsp;</strong>&nbsp;</h3><p>Ten years ago, I was still in the middle of my vocational training bachelor studies at SAP. At that time, I had never heard of the role “product manager” and therefore it was never my concrete goal to take up this job. However, I always knew that I wanted to start my career in a position with very close customer contact, so I spent my practical phases in departments like IBSO (Innovation Business Services Organization) and Consulting.&nbsp;</p><h3><strong>What was your motivation for starting in the world of AI?&nbsp;</strong>&nbsp;</h3><p>Actually,&nbsp;I&nbsp;didn’t actively choose a career in AI. I had a product management job in customer experience before and wanted a change and a new challenge. A former colleague told me about a job opening for an AI product manager around customer experience, which caught my interest. I didn’t know much about AI, but I had experience in the domain, so I decided to go for it. So, I decided to learn about AI from scratch. And now, I love it! I expanded my knowledge to other areas and asked our development team so many questions that I even feared annoying them.&nbsp;&nbsp;&nbsp;</p><h3><strong>Which AI project or achievement are you particularly proud of?</strong>&nbsp;</h3><p>When I joined the AI team, there was no unified commercialization model for the AI services the team was developing, there were no common templates for assets, and there wasn’t a unified messaging. I’m very proud of how I managed to commercialize many products and align the assets and messaging for our AI services in a short period of time.&nbsp;&nbsp;&nbsp;</p><h3><strong>What are the top skills that anyone who wants to work in AI needs?</strong>&nbsp;</h3><p>In the technology space in general, but especially in the AI area, you need to have curiosity. You have to be curious about current trends and new developments and the fast pace of this industry, which is why you also have to be quickly adaptable.&nbsp;&nbsp;&nbsp;</p><p>There are always new things, and once you become familiar with something, there is something new to learn.&nbsp;&nbsp;&nbsp;</p><p>In addition, I believe that it is essential to be a good communicator when it comes to artificial intelligence. On the one hand, many customers have high expectations; on the other hand, many do not know what AI exactly is. Both types require a specific way of communication.&nbsp;</p><h3><strong>What advice do you have for other women pursuing careers in tech?</strong>&nbsp;</h3><p>I would like to advise women pursuing a career in technology three things:&nbsp;&nbsp;</p><p>First, step out of your comfort zone. If your manager or project leader asks you to do something&nbsp;you’ve&nbsp;never done before, take on the task and try your best to succeed. If you feel it’s not working, you can always ask for help. But don’t just say “no” because&nbsp;you have&nbsp;never done it before. Be brave and trust in yourself, your abilities, and your skills.&nbsp;&nbsp;</p><p>Second, do good and talk about it. Women tend to belittle themselves; they don’t talk about the remarkable things they’ve accomplished but point to those who supported them or say it wasn’t a big deal. Don’t do that. Accept the credit for your hard work, accept the compliment for an accomplishment, don’t hide. And most importantly, don’t let others take credit for your work. Speak up, share your point of view, ask about a specific opportunity or training you’ve always wanted to attend.&nbsp;&nbsp;&nbsp;</p><p>Also, take advantage of career development initiatives within and outside your organization, find a coach or mentor to advise you, and help you work on yourself.&nbsp;&nbsp;&nbsp;</p><p>Finally, network – a great network will always help you move forward and support you through complex tasks. And let’s face it – women are simply better communicators&nbsp;<span style=\"background-color: initial;\"><img src=\"https://s.w.org/images/core/emoji/13.1.0/svg/1f609.svg\" alt=\"😉\"></span>&nbsp;</p><p>&nbsp;</p><p>Thank you for sharing these interesting and inspiring insights with us, Jana! We are sure that this will be a huge motivation boost for our community as it clearly shows how many possibilities and opportunities are open to everyone.&nbsp;</p>');
+INSERT INTO `i_article_body` VALUES ('925a30617231ce50a150575cb4a686f5', '8807446587d89e9211b8d97b422e6143', '<p>The following sections describe the architecture of an SAP system and which aspects are relevant for you as an ABAP developer with regard to performance. Let\'s first discuss the different layers of an SAP system and their tasks.</p><p><br></p><p><strong>SAP System Architecture</strong></p><p><br></p><p>An SAP system extends over multiple logical layers. From </p>');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for i_article_draft
+-- ----------------------------
+DROP TABLE IF EXISTS `i_article_draft`;
+CREATE TABLE `i_article_draft` (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '编码',
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户编码',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主题',
+  `subtitle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '副标题',
+  `keyword` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '关键字',
+  `title_images` int NOT NULL DEFAULT '0' COMMENT '副标题是否带图片 0 没有， 1张图片，3张图片',
+  `title_images_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '副标题图片链接',
+  `level` int DEFAULT '1' COMMENT '等级',
+  `category` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '类型',
+  `publish` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 未发布， 1 已经发布',
+  `publish_time` datetime DEFAULT NULL COMMENT '发布时间',
+  `body` longtext COLLATE utf8mb4_general_ci COMMENT '内容',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `change_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `version` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '锁',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of i_article_draft
+-- ----------------------------
+BEGIN;
+INSERT INTO `i_article_draft` VALUES ('ae09014c0eeba8ea2371f6b3551c6e26', '0cc2bd7f08ce2187b26c14fbb9c5b732', 'sdfsfsdfsdfsdfs', 'sdfsdfsdfsf', NULL, 0, NULL, 1, NULL, 0, NULL, NULL, '2021-12-01 13:45:02', '2021-12-01 13:45:02', '2021-12-01 13:45:02');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for i_category
+-- ----------------------------
+DROP TABLE IF EXISTS `i_category`;
+CREATE TABLE `i_category` (
+  `id` varchar(32) COLLATE utf8mb4_general_ci NOT NULL COMMENT '编码',
+  `code` varchar(32) COLLATE utf8mb4_general_ci NOT NULL COMMENT '编号',
+  `name` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '名称',
+  `icon` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '图标',
+  `url` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '链接',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of i_category
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for i_comments
+-- ----------------------------
+DROP TABLE IF EXISTS `i_comments`;
+CREATE TABLE `i_comments` (
+  `id` varchar(32) COLLATE utf8mb4_general_ci NOT NULL COMMENT '编码',
+  `article_id` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '文章编码',
+  `parent_id` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '父编码',
+  `username` varchar(32) COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户名',
+  `publish` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 未发布， 1 发布',
+  `content` varchar(255) COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
+  `create_time` datetime NOT NULL COMMENT '创建日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of i_comments
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for i_docs
+-- ----------------------------
+DROP TABLE IF EXISTS `i_docs`;
+CREATE TABLE `i_docs` (
+  `id` varchar(32) COLLATE utf8mb4_general_ci NOT NULL COMMENT '编码',
+  `category` varchar(32) COLLATE utf8mb4_general_ci NOT NULL COMMENT '类型',
+  `content` longtext COLLATE utf8mb4_general_ci COMMENT '内容',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `version` datetime DEFAULT NULL COMMENT '乐观锁',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of i_docs
+-- ----------------------------
+BEGIN;
+INSERT INTO `i_docs` VALUES ('01ca470d8b64794a2f485ca7461e12e9', 'about', '<h1 class=\"ql-align-center\"><span class=\"ql-size-huge\">About</span></h1><p class=\"ql-align-center\"><span style=\"color: rgb(61, 53, 54);\">如果您有任何疑问，请与我们联系，联系方式具体如下：电话：13688871265； Email:roy.cai@cyiplus.com</span></p>', '2022-04-28 11:40:36', '2022-04-28 11:40:36');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for sys_login
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_login`;
+CREATE TABLE `sys_login` (
+  `id` varchar(32) COLLATE utf8mb4_general_ci NOT NULL COMMENT '编码',
+  `user_id` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '用户编码',
+  `username` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '用户名',
+  `login_time` datetime DEFAULT NULL COMMENT '登陆时间',
+  `login_ip` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '登陆IP',
+  `login_client` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '登陆平台',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of sys_login
+-- ----------------------------
+BEGIN;
+INSERT INTO `sys_login` VALUES ('7a4e35bc5a871ebe348c739143baf704', '0cc2bd7f08ce2187b26c14fbb9c5b732', 'roy.cai@cyiplus.com', '2022-04-30 03:14:51', '127.0.0.1', NULL);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for sys_record
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_record`;
+CREATE TABLE `sys_record` (
+  `id` varchar(32) COLLATE utf8mb4_general_ci NOT NULL COMMENT '编码',
+  `category` varchar(32) COLLATE utf8mb4_general_ci NOT NULL COMMENT '类型',
+  `keyword` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '关键字',
+  `user` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '用户',
+  `article_id` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '文章编码',
+  `remark` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
+  `ip` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'IP',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of sys_record
+-- ----------------------------
+BEGIN;
+INSERT INTO `sys_record` VALUES ('0359a2ca9b0ac56be2a824e6b2263dcb', 'Article', 'View', NULL, 'd4007ece5d7202f521443443a8a635a1', NULL, '127.0.0.1', '2022-04-30 20:26:08');
+INSERT INTO `sys_record` VALUES ('1c2ffc6b8b72700e13724f832c5f1e26', 'Login', 'Success', 'roy.cai@cyiplus.com', NULL, NULL, '127.0.0.1', '2022-05-01 11:19:32');
+INSERT INTO `sys_record` VALUES ('1f33d9b5531ee997e85d5bd8095eab84', 'Article', 'View', NULL, 'd4007ece5d7202f521443443a8a635a1', NULL, '127.0.0.1', '2022-04-30 20:29:45');
+INSERT INTO `sys_record` VALUES ('2a9676954857859b9313ec154eabe032', 'Article', 'View', NULL, 'd4007ece5d7202f521443443a8a635a1', NULL, '127.0.0.1', '2022-05-01 00:40:41');
+INSERT INTO `sys_record` VALUES ('37e4ece60033e45410d7952e27ca51b8', 'Article', 'View', NULL, 'd4007ece5d7202f521443443a8a635a1', NULL, '127.0.0.1', '2022-05-01 00:42:54');
+INSERT INTO `sys_record` VALUES ('42c60a548e9229c93c8a0a6d26c4114e', 'Login', 'Success', 'roy.cai@cyiplus.com', NULL, NULL, '127.0.0.1', '2022-05-01 11:19:43');
+INSERT INTO `sys_record` VALUES ('42dec0a0b7d7e6266be962e4faacd2d5', 'Login', 'Success', 'roy.cai@cyiplus.com', NULL, NULL, '127.0.0.1', '2022-05-01 00:45:47');
+INSERT INTO `sys_record` VALUES ('52d76bf4e3b660849472d28cf70965a0', 'Article', 'View', NULL, 'd4007ece5d7202f521443443a8a635a1', NULL, '127.0.0.1', '2022-04-30 20:26:36');
+INSERT INTO `sys_record` VALUES ('674b7bb3eabf8c8c4379b91ba1e52fc8', 'Article', 'View', NULL, 'e475c67bb7f6d90c11235fc63f4e1df1', NULL, '127.0.0.1', '2022-04-30 14:34:41');
+INSERT INTO `sys_record` VALUES ('6a2e9aa89d2ad049013df186b86f4317', 'Article', 'View', NULL, 'd4007ece5d7202f521443443a8a635a1', NULL, '127.0.0.1', '2022-04-30 20:24:42');
+INSERT INTO `sys_record` VALUES ('790848c80623097a93ab3f62b786dd9b', 'Article', 'View', NULL, 'd4007ece5d7202f521443443a8a635a1', NULL, '127.0.0.1', '2022-05-01 00:41:21');
+INSERT INTO `sys_record` VALUES ('8bb76bb183a15298eec4cc13e562b639', 'Login', 'Fail', NULL, NULL, NULL, '127.0.0.1', '2022-05-01 11:19:32');
+INSERT INTO `sys_record` VALUES ('8d37fe08b763d34549f9d75ddc955548', 'Login', 'Success', 'roy.cai@cyiplus.com', NULL, NULL, '127.0.0.1', '2022-04-30 16:50:11');
+INSERT INTO `sys_record` VALUES ('95b67709ed0e8fd22a5df76648464547', 'Login', 'Success', 'roy.cai@cyiplus.com', NULL, NULL, '127.0.0.1', '2022-05-01 11:19:54');
+INSERT INTO `sys_record` VALUES ('9df2910b62ab428178826ee9c0d3bbe7', 'Article', 'View', NULL, 'd4007ece5d7202f521443443a8a635a1', NULL, '127.0.0.1', '2022-04-30 16:56:51');
+INSERT INTO `sys_record` VALUES ('ca90bd17ae595414b9a61506c991fd9a', 'Article', 'View', NULL, 'd4007ece5d7202f521443443a8a635a1', NULL, '127.0.0.1', '2022-04-30 20:29:17');
+INSERT INTO `sys_record` VALUES ('cbfee6f5fcda25a167b5b2dcc158b91e', 'Article', 'View', NULL, 'd4007ece5d7202f521443443a8a635a1', NULL, '127.0.0.1', '2022-04-30 22:20:21');
+INSERT INTO `sys_record` VALUES ('d2759e850dc7cecba6df09cf2a25a41d', 'Login', 'Fail', NULL, NULL, NULL, '127.0.0.1', '2022-05-01 11:19:43');
+INSERT INTO `sys_record` VALUES ('d9a50d0bc0657724fb583ef07ea32699', 'Article', 'View', NULL, 'e475c67bb7f6d90c11235fc63f4e1df1', NULL, '127.0.0.1', '2022-04-30 16:55:37');
+INSERT INTO `sys_record` VALUES ('dd0d0362cc17aa53a3fef725ecad09f0', 'Article', 'View', NULL, 'e475c67bb7f6d90c11235fc63f4e1df1', NULL, '127.0.0.1', '2022-04-30 16:53:39');
+INSERT INTO `sys_record` VALUES ('dd4ea4be7fee9c4791e283e55c68545a', 'Article', 'View', NULL, 'd4007ece5d7202f521443443a8a635a1', NULL, '127.0.0.1', '2022-05-01 00:00:46');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for sys_user
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user`;
+CREATE TABLE `sys_user` (
+  `id` varchar(32) COLLATE utf8mb4_general_ci NOT NULL COMMENT '编码',
+  `username` varchar(64) COLLATE utf8mb4_general_ci NOT NULL COMMENT '账号',
+  `password` varchar(64) COLLATE utf8mb4_general_ci NOT NULL COMMENT '密码',
+  `avatar` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '图标',
+  `nicename` varchar(64) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '别名',
+  `email` varchar(64) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '邮件',
+  `telphone` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '电话',
+  `sex` tinyint(1) DEFAULT '1' COMMENT '1 男，0 女',
+  `remark` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
+  `last_login_time` datetime DEFAULT NULL COMMENT '最后一次登陆时间',
+  `last_login_ip` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '最后一次登陆IP',
+  `deleted` tinyint(1) DEFAULT NULL COMMENT '0 未删除， 1 删除',
+  `version` datetime DEFAULT NULL COMMENT '锁',
+  PRIMARY KEY (`id`,`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of sys_user
+-- ----------------------------
+BEGIN;
+INSERT INTO `sys_user` VALUES ('0cc2bd7f08ce2187b26c14fbb9c5b732', 'roy.cai@cyiplus.com', '$2a$10$0ilP4ZD1kLugYwLCs4pmb.ZT9cFqzOZTNaMiHxrBnVIQUGUwEvBIO', 'https://www.changledo.com/logo.jpeg', 'Ilkka Cai', NULL, NULL, 1, NULL, '2022-05-01 11:19:54', '127.0.0.1', 0, '2022-04-22 18:09:57');
+COMMIT;
+
+SET FOREIGN_KEY_CHECKS = 1;
